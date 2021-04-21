@@ -12,9 +12,9 @@ class Header extends Component {
     const { expenses } = this.props;
     const expensesTotal = expenses
       .reduce((acc, { value, currency, exchangeRates }) => (
-        acc + (value * exchangeRates[currency].ask)
-      ), 0);
-    return expensesTotal;
+        acc + (value * exchangeRates[currency].ask)), 0);
+
+    return expensesTotal.toFixed(2);
   }
 
   render() {
@@ -76,10 +76,12 @@ Header.propTypes = {
   user: PropTypes.shape({
     email: PropTypes.string,
   }),
+  expenses: PropTypes.arrayOf(PropTypes.shape({ })),
 };
 
 Header.defaultProps = {
   user: PropTypes.shape({}),
+  expenses: PropTypes.arrayOf(),
 };
 
 export default connect(mapStateToProps)(Header);

@@ -26,12 +26,18 @@ const getExpensesInfo = (data, values) => ({
   info: values,
 });
 
+const filteredCurrencies = (rates, removeList = { DOGE: 'DOGE', USDT: 'USDT' }) => {
+  delete rates[removeList.DOGE];
+  delete rates[removeList.USDT];
+  return rates;
+};
+
 export function fetchCurrenciesAndAddUserInfo(values) {
   return (dispatch) => {
     dispatch(requestCurrencies());
     return getCurrenciesExchanges()
       .then(
-        (data) => dispatch(getExpensesInfo(data, values)),
+        (data) => dispatch(getExpensesInfo(filteredCurrencies(data), values)),
         (error) => dispatch(receiveCurrenciesFailure(error.message)),
       );
   };

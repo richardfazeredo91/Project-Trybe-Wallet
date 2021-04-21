@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import fetchCurrencies, { fetchCurrenciesAndAddUserInfo }
-from '../actions/expensiesAction';
-
+  from '../actions/expensiesAction';
 
 const initialState = {
   value: '',
@@ -14,16 +13,10 @@ const initialState = {
 };
 
 class Expensies extends Component {
-
   constructor(props) {
     super(props);
-    this.state = {
-      value: '',
-      description: '',
-      currency: 'USD',
-      method: 'Dinheiro',
-      tag: 'Alimentação',
-    };
+    this.state = initialState;
+
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -41,10 +34,11 @@ class Expensies extends Component {
     this.setState({ [name]: value });
   }
 
-  async handleSubmit(e) {
+  handleSubmit(e) {
     e.preventDefault();
     const { fetchCurrenciesAndAddInfo } = this.props;
     const { value, description, currency, method, tag } = this.state;
+
     fetchCurrenciesAndAddInfo({ value, description, currency, method, tag });
     this.setState(
       initialState,
@@ -52,6 +46,7 @@ class Expensies extends Component {
   }
 
   generateFields(element, values, options) {
+    const { [values[4]]: inputValue, [values[3]]: selectValue } = this.state;
     return element === 'input'
       ? (
         <label htmlFor={ values[0] }>
@@ -62,7 +57,7 @@ class Expensies extends Component {
             id={ values[0] }
             data-testid={ values[3] }
             name={ values[4] }
-            value={ this.state[values[4]] }
+            value={ inputValue }
             onChange={ this.handleChange }
           />
         </label>
@@ -74,7 +69,7 @@ class Expensies extends Component {
             id={ values[0] }
             data-testid={ values[2] }
             name={ values[3] }
-            value={ this.state[values[3]] }
+            value={ selectValue }
             onChange={ this.handleChange }
           >
             {
@@ -94,7 +89,7 @@ class Expensies extends Component {
 
   render() {
     const { currencies } = this.props;
-    const lengthOfCurrencyCode = 3;
+    const patternLengthOfCurrencyCode = 3;
     return (
       <form>
         {this.generateFields(
@@ -121,7 +116,7 @@ class Expensies extends Component {
               'exchange-field', 'Câmbio', 'currency-input', 'currency',
             ],
             Object.keys(currencies)
-              .filter((currencie) => currencie.length === lengthOfCurrencyCode),
+              .filter((currencie) => currencie.length === patternLengthOfCurrencyCode),
           ))}
 
         {this.generateFields(
