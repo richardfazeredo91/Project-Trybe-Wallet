@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import './style.css';
 
 class Header extends Component {
   constructor(props) {
@@ -20,49 +21,37 @@ class Header extends Component {
   render() {
     const { user } = this.props;
     return (
-      user.email
-        ? (
-          <header>
+      <header>
+        <div id="logo-display" className="logo-display">
+          <img src="../assets/trybe-logo" alt="logo" />
+        </div>
+
+        <div className="user-info-display">
+          <div id="user-email-display" className="user-email-display">
             <h1 data-testid="email-field">
-              {`Bem-vindo ${user.email}`}
+              { !user.email ? 'Login não efetuado!' : `Email: ${user.email}`}
             </h1>
+          </div>
 
+          <div id="user-expenses-display" className="user-expenses-display">
+            <p>
+              {'Despesa total: R$ '}
+            </p>
             <span
               data-testid="total-field"
               id="total-price"
             >
-              { this.updateExpensiesTotal() }
+              {this.updateExpensiesTotal()}
             </span>
-
             <span
               data-testid="header-currency-field"
               id="currency-price"
             >
               {' BRL'}
             </span>
-          </header>
-        )
-        : (
-          <header>
-            <h1>
-              Login não efetuado!
-            </h1>
-
-            <span
-              data-testid="total-field"
-              id="total-price"
-            >
-              { this.updateExpensiesTotal() }
-            </span>
-
-            <span
-              data-testid="header-currency-field"
-              id="currency-price"
-            >
-              {' BRL'}
-            </span>
-          </header>
-        )
+          </div>
+        </div>
+      </header>
     );
   }
 }

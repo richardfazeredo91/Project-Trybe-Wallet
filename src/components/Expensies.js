@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import fetchCurrencies, { fetchCurrenciesAndAddUserInfo }
   from '../actions/expensiesAction';
+import ExpensiesHeader from './ExpensiesHeader';
 
 const initialState = {
   value: '',
@@ -91,50 +92,49 @@ class Expensies extends Component {
     const { currencies } = this.props;
     const patternLengthOfCurrencyCode = 3;
     return (
-      <form>
-        {this.generateFields(
-          'input', [
-            'expense-field', 'Despesa', 'number', 'value-input', 'value',
-          ],
-        )}
-
-        {this.generateFields(
-          'input', [
-            'description-field',
-            'Descrição da despesa',
-            'text',
-            'description-input',
-            'description',
-          ],
-        )}
-
-        {(
-          Object.keys(currencies).length > 0
-        ) && (
-          this.generateFields(
-            'select', [
-              'exchange-field', 'Câmbio', 'currency-input', 'currency',
+      <>
+        <form>
+          {this.generateFields(
+            'input', [
+              'expense-field', 'Despesa:', 'number', 'value-input', 'value',
             ],
-            Object.keys(currencies)
-              .filter((currencie) => currencie.length === patternLengthOfCurrencyCode),
-          ))}
+          )}
+          {this.generateFields(
+            'input', [
+              'description-field',
+              'Descrição da despesa:',
+              'text',
+              'description-input',
+              'description',
+            ],
+          )}
+          {(
+            Object.keys(currencies).length > 0
+          ) && (
+            this.generateFields(
+              'select', [
+                'exchange-field', 'Câmbio: ', 'currency-input', 'currency',
+              ],
+              Object.keys(currencies)
+                .filter((currencie) => currencie.length === patternLengthOfCurrencyCode),
+            ))}
+          {this.generateFields(
+            'select', [
+              'payment-field', 'Pagamento: ', 'method-input', 'method',
+            ],
+            ['Dinheiro', 'Cartão de crédito', 'Cartão de débito'],
+          )}
+          {this.generateFields(
+            'select', [
+              'tag-field', 'Categoria: ', 'tag-input', 'tag',
+            ],
+            ['Alimentação', 'Lazer', 'Trabalho', 'Transporte', 'Saúde'],
+          )}
 
-        {this.generateFields(
-          'select', [
-            'payment-field', 'Pagamento', 'method-input', 'method',
-          ],
-          ['Dinheiro', 'Cartão de crédito', 'Cartão de débito'],
-        )}
-
-        {this.generateFields(
-          'select', [
-            'tag-field', 'Categoria', 'tag-input', 'tag',
-          ],
-          ['Alimentação', 'Lazer', 'Trabalho', 'Transporte', 'Saúde'],
-        )}
-
-        <button type="submit" onClick={ this.handleSubmit }>Adicionar despesa</button>
-      </form>
+          <button type="submit" onClick={ this.handleSubmit }>Adicionar despesa</button>
+        </form>
+        <ExpensiesHeader />
+      </>
     );
   }
 }
