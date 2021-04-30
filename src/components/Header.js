@@ -6,10 +6,10 @@ import './style.css';
 class Header extends Component {
   constructor(props) {
     super(props);
-    this.updateExpensiesTotal = this.updateExpensiesTotal.bind(this);
+    this.updateExpensesTotal = this.updateExpensesTotal.bind(this);
   }
 
-  updateExpensiesTotal() {
+  updateExpensesTotal() {
     const { expenses } = this.props;
     const expensesTotal = expenses
       .reduce((acc, { value, currency, exchangeRates }) => (
@@ -41,7 +41,7 @@ class Header extends Component {
               data-testid="total-field"
               id="total-price"
             >
-              {this.updateExpensiesTotal()}
+              {this.updateExpensesTotal()}
             </span>
             <span
               data-testid="header-currency-field"

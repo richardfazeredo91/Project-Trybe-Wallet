@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import fetchCurrencies, { fetchCurrenciesAndAddUserInfo }
-  from '../actions/expensiesAction';
-import ExpensiesHeader from './ExpensiesHeader';
+  from '../actions/expensesAction';
+import ExpensesHeader from './ExpensesHeader';
 
 const initialState = {
   value: '',
@@ -13,7 +13,7 @@ const initialState = {
   tag: 'Alimentação',
 };
 
-class Expensies extends Component {
+class Expenses extends Component {
   constructor(props) {
     super(props);
     this.state = initialState;
@@ -133,7 +133,7 @@ class Expensies extends Component {
 
           <button type="submit" onClick={ this.handleSubmit }>Adicionar despesa</button>
         </form>
-        <ExpensiesHeader />
+        <ExpensesHeader />
       </>
     );
   }
@@ -149,9 +149,9 @@ const mapDispatchToProps = (dispatch) => ({
   fetchCurrenciesAndAddInfo: (values) => dispatch(fetchCurrenciesAndAddUserInfo(values)),
 });
 
-Expensies.propTypes = {
+Expenses.propTypes = {
   fetchApiCurrencies: PropTypes.shape({}),
   fetchCurrenciesAndAddInfo: PropTypes.shape({}),
 }.isRequired;
 
-export default connect(mapStateToProps, mapDispatchToProps)(Expensies);
+export default connect(mapStateToProps, mapDispatchToProps)(Expenses);
