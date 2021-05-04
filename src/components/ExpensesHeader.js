@@ -7,12 +7,11 @@ import { deleteExpense, editExpense } from '../actions/expensesAction';
 class ExpensesHeader extends React.Component {
   render() {
     const { expenses, deleteRegister } = this.props;
-    const getNameBeforeBar = /[^/]*/;
+    const getNameBeforeSlash = /[^/]*/;
     const limitDecimals = (value) => (parseFloat(value)).toFixed(2);
     const headersWallet = [
       'Descrição', 'Tag', 'Método de pagamento', 'Valor', 'Moeda',
-      'Câmbio utilizado', 'Valor convertido', 'Moeda de conversão', 'Editar/Excluir',
-    ];
+      'Câmbio utilizado', 'Valor convertido', 'Moeda de conversão', 'Editar/Excluir'];
     return (
       <table>
         <thead>
@@ -27,7 +26,7 @@ class ExpensesHeader extends React.Component {
               <td>{tag}</td>
               <td>{method}</td>
               <td>{value}</td>
-              <td>{exchangeRates[currency].name.match(getNameBeforeBar)}</td>
+              <td>{exchangeRates[currency].name.match(getNameBeforeSlash)}</td>
               <td>{limitDecimals(exchangeRates[currency].ask)}</td>
               <td>{limitDecimals(value * exchangeRates[currency].ask)}</td>
               <td>Real</td>
@@ -54,7 +53,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   deleteRegister: (id) => dispatch(deleteExpense(id)),
-  editRegister: (id) => dispatch(editExpense(id)),
+  editRegister: (id, payload) => dispatch(editExpense(id, payload)),
 });
 
 ExpensesHeader.propTypes = {

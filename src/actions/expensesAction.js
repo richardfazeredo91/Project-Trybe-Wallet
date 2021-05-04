@@ -4,7 +4,6 @@ import {
   RECEIVE_CURRENCIES_FAILURE,
   GET_EXPENSES_INFO,
   DELETE_EXPENSE,
-  EDIT_EXPENSE,
 } from './actionTypes';
 import getCurrenciesExchanges from '../services/awesomeApi';
 
@@ -31,13 +30,6 @@ const getExpensesInfo = (data, values) => ({
 export function deleteExpense(id) {
   return {
     type: DELETE_EXPENSE,
-    id,
-  };
-}
-
-export function editExpense(id) {
-  return {
-    type: EDIT_EXPENSE,
     id,
   };
 }
