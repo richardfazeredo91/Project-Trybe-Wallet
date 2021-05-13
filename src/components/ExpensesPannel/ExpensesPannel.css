@@ -1,0 +1,65 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+section {
+  background-color: #262934;
+  height: 80px;
+}
+
+form {
+  align-content: center;
+  display: flex;
+  height: inherit;
+  justify-content: space-around;
+}
+
+form label {
+  display: flex;
+}
+
+form label:first-child {
+  margin-left: 15px;
+}
+
+form label:nth-child( 1n ) {
+  align-self: center;
+  color: white;
+}
+
+form label input {
+  align-self: center;
+  border-radius: 5px;
+  font-size: smaller;
+  height: 40px;
+  margin-left: 10px;
+}
+
+form label select {
+  align-self: center;
+  border-radius: 5px;
+  font-size: smaller;
+  height: 40px;
+  margin-left: 10px;
+}
+
+form button {
+  align-self: center;
+  background-color: #3733fb;
+  border-radius: 5px;
+  color: white;
+  font-size: 0.7em;
+  height: 40px;
+  transform: scale(0.9);
+  width: 150px;
+}
+
+form button:hover {
+  align-self: center;
+  background-image: radial-gradient(ellipse, #2a61fb 20%, #3733fb 60%);
+  color: white;
+  height: 40px;
+  transform: scale(1);
+}

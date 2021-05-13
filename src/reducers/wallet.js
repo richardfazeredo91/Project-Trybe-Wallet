@@ -4,6 +4,7 @@ import {
   GET_EXPENSES_INFO,
   RECEIVE_CURRENCIES_FAILURE,
   DELETE_EXPENSE,
+  EDIT_EXPENSE,
 } from '../actions/actionTypes';
 
 const INITIAL_WALLET_EXPENSES = {
@@ -43,6 +44,17 @@ const wallet = (state = INITIAL_WALLET_EXPENSES, action) => {
 
   case DELETE_EXPENSE: {
     return { ...state, expenses: expensesToKeep };
+  }
+
+  case EDIT_EXPENSE: {
+    const editedExpense = state.expenses.find((expense) => (
+      parseInt(expense.id, BASE_TEN) === parseInt(action.id, BASE_TEN)));
+    expensesToKeep.splice(action.id, 0, { ...editedExpense, ...action.payload });
+
+    return {
+      ...state,
+      expenses: expensesToKeep,
+    };
   }
 
   default:

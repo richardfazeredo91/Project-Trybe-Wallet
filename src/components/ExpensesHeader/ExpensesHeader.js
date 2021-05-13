@@ -2,18 +2,20 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { MdDeleteForever } from 'react-icons/md';
-import { deleteExpense, editExpense } from '../actions/expensesAction';
+import { BiEditAlt } from 'react-icons/bi';
+import { deleteExpense } from '../../actions/expensesAction';
+import './ExpensesHeader.css';
 
 class ExpensesHeader extends React.Component {
   render() {
-    const { expenses, deleteRegister } = this.props;
+    const { expenses, deleteRegister, renderEditPannel } = this.props;
     const getNameBeforeSlash = /[^/]*/;
     const limitDecimals = (value) => (parseFloat(value)).toFixed(2);
     const headersWallet = [
       'Descrição', 'Tag', 'Método de pagamento', 'Valor', 'Moeda',
       'Câmbio utilizado', 'Valor convertido', 'Moeda de conversão', 'Editar/Excluir'];
     return (
-      <table>
+      <table cellSpacing="0">
         <thead>
           <tr>{headersWallet.map((header, index) => <th key={ index }>{header}</th>)}</tr>
         </thead>
@@ -33,6 +35,16 @@ class ExpensesHeader extends React.Component {
               <td>
                 <button
                   type="button"
+                  className="edit-btn"
+                  data-testid="edit-btn"
+                  id="edit-btn"
+                  onClick={ () => renderEditPannel(id, expenses) }
+                >
+                  <BiEditAlt />
+                </button>
+                <button
+                  type="button"
+                  className="delete-btn"
                   data-testid="delete-btn"
                   onClick={ () => deleteRegister(id) }
                 >
@@ -53,12 +65,12 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   deleteRegister: (id) => dispatch(deleteExpense(id)),
-  editRegister: (id, payload) => dispatch(editExpense(id, payload)),
 });
 
 ExpensesHeader.propTypes = {
-  expenses: PropTypes.arrayOf(PropTypes.shape({ })),
   deleteRegister: PropTypes.func,
+  expenses: PropTypes.arrayOf(PropTypes.shape({ })),
+  renderEditPannel: PropTypes.func.isRequired,
 };
 
 ExpensesHeader.defaultProps = {

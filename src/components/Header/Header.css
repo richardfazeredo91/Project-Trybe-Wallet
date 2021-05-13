@@ -1,0 +1,45 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  align-content: center;
+  display: flex;
+  height: 80px;
+  justify-content: space-between;
+}
+
+.logo {
+  height: 80px;
+  margin: 0 0 0 15px;
+  padding: 0;
+  width: 100px;
+}
+
+.user-info-display {
+  align-content: center;
+  display: flex;
+  height: 80px;
+}
+
+.user-email-display {
+  display: flex;
+  height: 80px;
+  margin-right: 60px;
+}
+
+.user-expenses-display {
+  display: flex;
+  height: 80px;
+  margin-right: 25px;
+}
+
+.user-email-display p {
+  align-self: center;
+}
+
+.user-expenses-display p {
+  align-self: center;
+}

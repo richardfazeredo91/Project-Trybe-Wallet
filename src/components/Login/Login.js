@@ -1,7 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import loginAction from '../actions/loginAction';
+import loginAction from '../../actions/loginAction';
+import './Login.css';
 
 class Login extends React.Component {
   constructor(props) {
@@ -28,7 +29,8 @@ class Login extends React.Component {
     });
   }
 
-  handleSubmit() {
+  handleSubmit(e) {
+    e.preventDefault();
     const { email } = this.state;
     const { history, loginActionProp } = this.props;
     loginActionProp(email);

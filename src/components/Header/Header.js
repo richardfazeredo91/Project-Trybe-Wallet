@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import './style.css';
+import Logo from '../../assets/trybe-logo.png';
+import './Header.css';
 
 class Header extends Component {
   constructor(props) {
@@ -23,32 +24,27 @@ class Header extends Component {
     return (
       <header>
         <div id="logo-display" className="logo-display">
-          <img src="../assets/trybe-logo" alt="logo" />
+          <img src={ Logo } className="logo" alt="logo" />
         </div>
 
         <div className="user-info-display">
           <div id="user-email-display" className="user-email-display">
-            <h1 data-testid="email-field">
+            <p data-testid="email-field">
               { !user.email ? 'Login não efetuado!' : `Email: ${user.email}`}
-            </h1>
+            </p>
           </div>
 
           <div id="user-expenses-display" className="user-expenses-display">
-            <p>
-              {'Despesa total: R$ '}
+            <p data-testid="total-field" id="total-price">
+              {`Despesa Total: R$ 
+              ${this.updateExpensesTotal()}`}
             </p>
-            <span
-              data-testid="total-field"
-              id="total-price"
-            >
-              {this.updateExpensesTotal()}
-            </span>
-            <span
+            <p
               data-testid="header-currency-field"
               id="currency-price"
             >
-              {' BRL'}
-            </span>
+              BRL
+            </p>
           </div>
         </div>
       </header>
