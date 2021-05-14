@@ -51,8 +51,10 @@ class Expenses extends Component {
   editExpense(e) {
     e.preventDefault();
     const { editRegister } = this.props;
-    const { value, description, currency, method,
-      tag, edit: { idEdited } } = this.state;
+    const {
+      value, description, currency, method, tag, edit: { idEdited },
+    } = this.state;
+
     editRegister(idEdited, { value, description, currency, method, tag });
     this.setState(INITIAL_STATE);
   }
@@ -73,13 +75,11 @@ class Expenses extends Component {
   }
 
   render() {
-    const { currencies } = this.props;
     return (
       <>
         <ExpensesPannel
           addExpense={ this.addExpense }
           editExpense={ this.editExpense }
-          currencies={ currencies }
           handleChange={ this.handleChange }
           generateFields={ this.generateFields }
           state={ this.state }
@@ -90,11 +90,6 @@ class Expenses extends Component {
   }
 }
 
-const mapStateToProps = (state) => ({
-  currencies: state.wallet.currencies,
-  expenses: state.wallet.expenses,
-});
-
 const mapDispatchToProps = (dispatch) => ({
   fetchApiCurrencies: () => dispatch(fetchCurrencies()),
   fetchCurrenciesAndAddInfo: (values) => dispatch(fetchCurrenciesAndAddUserInfo(values)),
@@ -102,16 +97,14 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 Expenses.propTypes = {
-  currencies: PropTypes.arrayOf(PropTypes.shape({ })),
   editRegister: PropTypes.func,
   fetchCurrenciesAndAddInfo: PropTypes.func,
   fetchApiCurrencies: PropTypes.func.isRequired,
 };
 
 Expenses.defaultProps = {
-  currencies: PropTypes.arrayOf(),
   editRegister: PropTypes.func,
   fetchCurrenciesAndAddInfo: PropTypes.func,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Expenses);
+export default connect(null, mapDispatchToProps)(Expenses);

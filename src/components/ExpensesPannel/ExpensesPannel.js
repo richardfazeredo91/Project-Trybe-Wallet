@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import './ExpensesPannel.css';
+import { connect } from 'react-redux';
 
 class ExpensesPannel extends React.Component {
   generateFields(element, values, options) {
@@ -61,13 +62,13 @@ class ExpensesPannel extends React.Component {
             ],
           )}
           {(
-            Object.keys(currencies).length > 0
+            currencies.length
           ) && (
             this.generateFields(
               'select', [
                 'exchange-field', 'Câmbio:', 'currency-input', 'currency',
               ],
-              Object.keys(currencies)
+              currencies
                 .filter((currencie) => currencie.length === patternLengthOfCurrencyCode),
             ))}
           {this.generateFields(
@@ -100,8 +101,12 @@ class ExpensesPannel extends React.Component {
   }
 }
 
+const mapStateToProps = (state) => ({
+  currencies: state.wallet.currencies,
+});
+
 ExpensesPannel.propTypes = {
-  currencies: PropTypes.arrayOf(PropTypes.shape({})),
+  currencies: PropTypes.arrayOf(),
 }.isRequired;
 
-export default ExpensesPannel;
+export default connect(mapStateToProps)(ExpensesPannel);

@@ -23,11 +23,14 @@ const wallet = (state = INITIAL_WALLET_EXPENSES, action) => {
     return { ...state, isFetching: true };
 
   case RECEIVE_CURRENCIES_SUCCESS:
-    return { ...state, currencies: action.data, isFetching: false };
+    return { ...state, currencies: Object.keys(action.data), isFetching: false };
+
+  case RECEIVE_CURRENCIES_FAILURE:
+    return { ...state, error: action.error, isFetching: false };
 
   case GET_EXPENSES_INFO:
     return {
-      currencies: action.data,
+      ...state,
       expenses: [
         ...state.expenses,
         {
@@ -36,11 +39,7 @@ const wallet = (state = INITIAL_WALLET_EXPENSES, action) => {
           exchangeRates: action.data,
         },
       ],
-      isFetching: false,
     };
-
-  case RECEIVE_CURRENCIES_FAILURE:
-    return { ...state, error: action.error, isFetching: false };
 
   case DELETE_EXPENSE: {
     return { ...state, expenses: expensesToKeep };
