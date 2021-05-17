@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Logo from '../../assets/trybe-logo.png';
 import './Header.css';
@@ -21,7 +20,8 @@ class Header extends Component {
   }
 
   render() {
-    const { user } = this.props;
+    const { user: { email } } = this.props;
+
     return (
       <header>
         <div id="logo-display" className="logo-display">
@@ -31,7 +31,7 @@ class Header extends Component {
         <div className="user-info-display">
           <div id="user-email-display" className="user-email-display">
             <p data-testid="email-field">
-              { !user.email ? <Redirect to="/" /> : `Email: ${user.email}`}
+              { `Email: ${email}` }
             </p>
           </div>
 

@@ -30,11 +30,20 @@ fieldset {
 }
 
 input {
+  border: 1px solid rgba(136, 132, 132, 0.5);
+  border-radius: 5px;
+  color: rgb(12, 10, 10, 0.7);
   font-family: Courier New, Courier, monospace;
   font-size: smaller;
   height: 50px;
   text-align: center;
   width: 75%;
+}
+
+input:focus {
+  border-color: #5cfae0;
+  box-shadow: 0 0 10px #68adf7;
+  outline: none;
 }
 
 .login-button {
