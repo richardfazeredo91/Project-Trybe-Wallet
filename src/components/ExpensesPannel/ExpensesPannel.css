@@ -16,36 +16,31 @@ form {
   justify-content: space-around;
 }
 
-form label {
+label {
+  align-items: center;
   display: flex;
 }
 
-form label:first-child {
-  margin-left: 15px;
+[ name = 'value' ] {
+  width: 130px;
 }
 
-form label:nth-child( 1n ) {
-  align-self: center;
+[ name = 'description' ] {
+  width: 450px;
+}
+
+label:nth-child( 1n ) {
   color: white;
 }
 
-form label input {
-  align-self: center;
+label input , label select {
   border-radius: 5px;
   font-size: smaller;
   height: 40px;
   margin-left: 10px;
 }
 
-form label select {
-  align-self: center;
-  border-radius: 5px;
-  font-size: smaller;
-  height: 40px;
-  margin-left: 10px;
-}
-
-form button {
+.add-edt-btn {
   align-self: center;
   background-color: #3733fb;
   border-radius: 5px;
@@ -56,10 +51,7 @@ form button {
   width: 150px;
 }
 
-form button:hover {
-  align-self: center;
+.add-edt-btn:hover {
   background-image: radial-gradient(ellipse, #2a61fb 20%, #3733fb 60%);
-  color: white;
-  height: 40px;
   transform: scale(1);
 }

@@ -19,6 +19,7 @@ class ExpensesPannel extends React.Component {
             id={ values[0] }
             data-testid={ values[3] }
             name={ values[4] }
+            className={ values[5] }
             value={ inputValue }
             onChange={ handleChange }
           />
@@ -58,7 +59,7 @@ class ExpensesPannel extends React.Component {
         <form>
           {this.generateFields(
             'input', [
-              'expense-field', 'Despesa:', 'number', 'value-input', 'value',
+              'expense-id', 'Despesa:', 'number', 'value-input', 'value',
             ],
           )}
           {(
@@ -66,33 +67,33 @@ class ExpensesPannel extends React.Component {
           ) && (
             this.generateFields(
               'select', [
-                'exchange-field', 'Câmbio:', 'currency-input', 'currency',
+                'exchange-id', 'Câmbio:', 'currency-input', 'currency',
               ],
               currencies
                 .filter((currencie) => currencie.length === patternLengthOfCurrencyCode),
             ))}
           {this.generateFields(
             'select', [
-              'payment-field', 'Pagamento:', 'method-input', 'method',
+              'payment-id', 'Pagamento:', 'method-input', 'method',
             ],
             ['Dinheiro', 'Cartão de crédito', 'Cartão de débito'],
           )}
           {this.generateFields(
             'select', [
-              'tag-field', 'Categoria:', 'tag-input', 'tag',
+              'tag-id', 'Categoria:', 'tag-input', 'tag',
             ],
             ['Alimentação', 'Lazer', 'Trabalho', 'Transporte', 'Saúde'],
           )}
           {this.generateFields(
             'input', [
-              'description-field',
-              'Descrição:',
-              'text',
-              'description-input',
-              'description',
+              'description-id', 'Descrição:', 'text', 'description-input', 'description',
             ],
           )}
-          <button type="submit" onClick={ isEdited ? editExpense : addExpense }>
+          <button
+            type="submit"
+            className="add-edt-btn"
+            onClick={ isEdited ? editExpense : addExpense }
+          >
             { isEdited ? 'Editar despesa' : 'Adicionar despesa' }
           </button>
         </form>

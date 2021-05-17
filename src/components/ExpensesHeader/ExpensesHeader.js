@@ -3,12 +3,11 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { MdDeleteForever } from 'react-icons/md';
 import { BiEditAlt } from 'react-icons/bi';
-import { deleteExpense } from '../../actions/expensesAction';
 import './ExpensesHeader.css';
 
 class ExpensesHeader extends React.Component {
   render() {
-    const { expenses, deleteRegister, renderEditPannel } = this.props;
+    const { expenses, deleteExpense, renderEditPannel } = this.props;
     const getNameBeforeSlash = /[^/]*/;
     const limitDecimals = (value) => (parseFloat(value)).toFixed(2);
     const headersWallet = [
@@ -23,7 +22,7 @@ class ExpensesHeader extends React.Component {
           {expenses.map((
             { id, description, tag, method, value, currency, exchangeRates },
           ) => (
-            <tr key={ id }>
+            <tr key={ id } className="expense-register">
               <td>{description}</td>
               <td>{tag}</td>
               <td>{method}</td>
@@ -46,7 +45,7 @@ class ExpensesHeader extends React.Component {
                   type="button"
                   className="delete-btn"
                   data-testid="delete-btn"
-                  onClick={ () => deleteRegister(id) }
+                  onClick={ () => deleteExpense(id) }
                 >
                   <MdDeleteForever />
                 </button>
@@ -63,19 +62,14 @@ const mapStateToProps = (state) => ({
   expenses: state.wallet.expenses,
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  deleteRegister: (id) => dispatch(deleteExpense(id)),
-});
-
 ExpensesHeader.propTypes = {
-  deleteRegister: PropTypes.func,
+  deleteExpense: PropTypes.func.isRequired,
   expenses: PropTypes.arrayOf(PropTypes.shape({ })),
   renderEditPannel: PropTypes.func.isRequired,
 };
 
 ExpensesHeader.defaultProps = {
   expenses: PropTypes.arrayOf(),
-  deleteRegister: PropTypes.func,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ExpensesHeader);
+export default connect(mapStateToProps)(ExpensesHeader);
