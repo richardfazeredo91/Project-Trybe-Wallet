@@ -81,7 +81,6 @@ class Expenses extends Component {
           addExpense={ this.addExpense }
           editExpense={ this.editExpense }
           handleChange={ this.handleChange }
-          generateFields={ this.generateFields }
           state={ this.state }
         />
         <ExpensesHeader renderEditPannel={ this.renderEditPannel } />
